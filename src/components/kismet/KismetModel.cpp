@@ -1,7 +1,7 @@
 #include "KismetModel.h"
 
 KismetModel::KismetModel(BakkesMod::Plugin::BakkesModPlugin *plugin)
-        : plugin(plugin), kismetVars()
+        : plugin(plugin), kismetVars(), autoRefreshEnabled(true)
 {
 
 }
@@ -14,7 +14,7 @@ KismetModel &KismetModel::getInstance(BakkesMod::Plugin::BakkesModPlugin *plugin
 
 void KismetModel::onEvent(const std::string &eventName, bool post, void *params)
 {
-    if (eventName == "Function TAGame.Car_TA.SetVehicleInput" && post)
+    if (eventName == "Function TAGame.Car_TA.SetVehicleInput" && post && this->autoRefreshEnabled)
     {
         this->kismetVars = this->loadKismetVars();
     }
@@ -27,6 +27,21 @@ void KismetModel::onEvent(const std::string &eventName, bool post, void *params)
     if (eventName == "Function TAGame.GameEvent_Soccar_TA.Destroyed" && post)
     {
         this->kismetVars.clear();
+    }
+}
+
+void KismetModel::render()
+{
+    ImGui::Checkbox("Auto Refresh Kismet Variables", &this->autoRefreshEnabled);
+
+    if (!this->autoRefreshEnabled)
+    {
+        if (ImGui::Button("Refresh"))
+        {
+            this->plugin->gameWrapper->Execute([this](GameWrapper* gw) {
+                this->kismetVars = this->loadKismetVars();
+                });
+        }
     }
 }
 
@@ -145,4 +160,12 @@ void KismetModel::setStringValue(const std::string &name, const std::string &val
     KismetVar kismetVar = this->getVar(name);
     kismetVar.setStringValue(value);
     this->updateSequence(kismetVar);
+}
+
+void KismetModel::ActivateRemoteEvent(std::string eventName)
+{
+    auto sequence = this->plugin->gameWrapper->GetMainSequence();
+    if (sequence.memory_address == NULL) return;
+
+    sequence.ActivateRemoteEvents(eventName);
 }

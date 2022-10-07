@@ -7,6 +7,7 @@ class KismetModel
 private:
     BakkesMod::Plugin::BakkesModPlugin *plugin;
     std::vector<KismetVar> kismetVars;
+    bool autoRefreshEnabled;
 
     explicit KismetModel(BakkesMod::Plugin::BakkesModPlugin *plugin);
 
@@ -14,6 +15,7 @@ public:
     static KismetModel &getInstance(BakkesMod::Plugin::BakkesModPlugin *plugin);
 
     void onEvent(const std::string &eventName, bool post, void *params);
+    void render();
 
     bool varExists(const std::string &name);
     KismetVar getVar(const std::string &name);
@@ -37,4 +39,6 @@ public:
 
     std::string getStringValue(const std::string &name);
     void setStringValue(const std::string &name, const std::string &value);
+
+    void ActivateRemoteEvent(std::string eventName);
 };

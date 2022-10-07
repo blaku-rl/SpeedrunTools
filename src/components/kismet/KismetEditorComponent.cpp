@@ -20,6 +20,8 @@ void KismetEditorComponent::render()
 {
     std::vector<KismetVar> kismetVars = this->kismetModel.getKismetVars();
 
+    this->kismetModel.render();
+
     if (kismetVars.empty())
     {
         ImGui::Text("No kismet variables were found for the current map.");

@@ -12,6 +12,10 @@
 #include "dribble/Dribble2OverhaulMapToolsComponent.h"
 #include "leth/LethsEgyptianTombMapToolsComponent.h"
 #include "minigolf/MinigolfMapToolsComponent.h"
+#include "thunda/KaizoEgyptianTombMapToolsComponent.h"
+#include "shark/TheMazeMapToolsComponent.h"
+#include "gidek/DaciaSpringElectricChallengeMapToolsComponent.h"
+#include "dmc//DmcNoobDribbleMapToolsComponent.h"
 #include "../../external/ocornut/imgui/imgui_searchablecombo.h"
 
 MapToolsSelectorComponent::MapToolsSelectorComponent(NetcodePlugin *plugin)
@@ -31,6 +35,10 @@ MapToolsSelectorComponent::MapToolsSelectorComponent(NetcodePlugin *plugin)
     this->maps.push_back(std::make_unique<Dribble2OverhaulMapToolsComponent>(plugin));
     this->maps.push_back(std::make_unique<LethsEgyptianTombMapToolsComponent>(plugin));
     this->maps.push_back(std::make_unique<MinigolfMapToolsComponent>(plugin));
+    this->maps.push_back(std::make_unique<KaizoEgyptianTombMapToolsComponent>(plugin));
+    this->maps.push_back(std::make_unique<TheMazeMapToolsComponent>(plugin));
+    this->maps.push_back(std::make_unique<DaciaSpringElectricChallengeMapToolsComponent>(plugin));
+    this->maps.push_back(std::make_unique<DmcNoobDribbleMapToolsComponent>(plugin));
     //this->maps.push_back(std::make_unique<SpeedJumpTrials1MapToolsComponent>(plugin));
 
     this->mapNames = {};

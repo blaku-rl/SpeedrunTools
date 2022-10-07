@@ -13,6 +13,7 @@ void LethsGiantRingsMapToolsComponent::resetMap()
     this->kismetModel.setBoolValue("Timing", false);
     this->kismetModel.setIntValue("Level", 1);
     this->kismetModel.setIntValue("Deaths", 0);
+    this->kismetModel.setIntValue("Minutes", 0);
     this->kismetModel.setIntValue("Seconds", 0);
     this->mapToolsModel.resetPlayers();
 }
