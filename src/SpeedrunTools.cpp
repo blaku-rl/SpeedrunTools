@@ -119,6 +119,9 @@ void SpeedrunTools::setupEvents()
 
     // goal scored function
     this->setupEventPost("Function TAGame.Ball_TA.Explode");
+
+    // car teleport
+    this->setupEventPost("Function TAGame.Car_TA.Teleport");
 }
 
 void SpeedrunTools::setupEventPost(const std::string &eventName)

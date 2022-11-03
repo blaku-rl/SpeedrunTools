@@ -16,6 +16,7 @@
 #include "shark/TheMazeMapToolsComponent.h"
 #include "gidek/DaciaSpringElectricChallengeMapToolsComponent.h"
 #include "dmc//DmcNoobDribbleMapToolsComponent.h"
+#include "eversax/EversaxDribbleChallengeMapToolsComponent.h"
 #include "../../external/ocornut/imgui/imgui_searchablecombo.h"
 
 MapToolsSelectorComponent::MapToolsSelectorComponent(NetcodePlugin *plugin)
@@ -39,6 +40,7 @@ MapToolsSelectorComponent::MapToolsSelectorComponent(NetcodePlugin *plugin)
     this->maps.push_back(std::make_unique<TheMazeMapToolsComponent>(plugin));
     this->maps.push_back(std::make_unique<DaciaSpringElectricChallengeMapToolsComponent>(plugin));
     this->maps.push_back(std::make_unique<DmcNoobDribbleMapToolsComponent>(plugin));
+    this->maps.push_back(std::make_unique<EversaxDribbleChallengeMapToolsComponent>(plugin));
     //this->maps.push_back(std::make_unique<SpeedJumpTrials1MapToolsComponent>(plugin));
 
     this->mapNames = {};
